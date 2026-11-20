@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatApp</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Login -->
+  <div id="login" class="overlay">
+    <form id="loginForm" class="card" autocomplete="off">
+      <div class="logo">💬</div>
+      <h1>ChatApp</h1>
+      <p class="muted">Enter a name and jump into the conversation</p>
+      <input id="usernameInput" placeholder="Your name" maxlength="20" required autofocus />
+      <select id="roomSelect"></select>
+      <button type="submit" class="btn">Join chat</button>
+      <p id="loginError" class="error" role="alert"></p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="side-head">
+        <strong>💬 ChatApp</strong>
+        <span id="status" class="status offline" title="Connection status"></span>
+      </div>
+
+      <h3>Rooms</h3>
+      <ul id="roomList" class="list"></ul>
+      <form id="newRoomForm" class="new-room">
+        <input id="newRoomInput" placeholder="+ new room" maxlength="20" />
+      </form>
+
+      <h3 id="dmHeader" class="hidden">Direct messages</h3>
+      <ul id="dmList" class="list"></ul>
+
+      <h3>Online in <span id="usersRoom"></span> (<span id="userCount">0</span>)</h3>
+      <ul id="userList" class="list users"></ul>
+      <p class="hint">Tap a name to message privately</p>
+
+      <div class="me">
+        <span id="meAvatar" class="avatar"></span>
+        <span id="meName"></span>
+      </div>
+    </aside>
+
+    <main class="chat">
+      <header class="chat-head">
+        <button id="menuBtn" class="icon-btn" aria-label="Menu">☰</button>
+        <div>
+          <h2 id="chatTitle"></h2>
+        </div>
+        <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">🌓</button>
+      </header>
+
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <div id="typing" class="typing"></div>
+      <div id="preview" class="preview hidden">
+        <img id="previewImg" alt="Selected image" />
+        <button type="button" id="previewRemove" class="icon-btn" aria-label="Remove image">✕</button>
+      </div>
+
+      <form id="messageForm" class="composer">
+        <button type="button" id="emojiBtn" class="icon-btn" aria-label="Emoji">😊</button>
+        <button type="button" id="attachBtn" class="icon-btn" aria-label="Attach image">📎</button>
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <textarea id="messageInput" rows="1" placeholder="Type a message…" maxlength="1000"></textarea>
+        <button type="submit" class="btn send">Send</button>
+        <div id="emojiPanel" class="emoji-panel hidden"></div>
+      </form>
+    </main>
+  </div>
+
+  <div id="lightbox" class="lightbox hidden"><img id="lightboxImg" alt="" /></div>
+  <div id="toast" class="toast"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
